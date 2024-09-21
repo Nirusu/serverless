@@ -1,0 +1,19 @@
+steps:
+  - id: "Pulling image"
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      - "pull"
+      - "gcr.io/serverless-journey/insecure"
+  - id: "Tagging image"
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      - "tag"
+      - "gcr.io/serverless-journey/insecure"
+      - "$_ARTIFACT_REGION-docker.pkg.dev/$PROJECT_ID/my-repo/dockerinsecure:latest"
+  - id: "Pushing image"
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      - "push"
+      - "$_ARTIFACT_REGION-docker.pkg.dev/$PROJECT_ID/my-repo/dockerinsecure:latest"
+images:
+  - "$_ARTIFACT_REGION-docker.pkg.dev/$PROJECT_ID/my-repo/dockerinsecure:latest"
